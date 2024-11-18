@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { useState } from "react";
+import Navbar from "./components/Navbar/index";
+import PostsLists from "./components/PostsLists/index";
+import Modal from "./components/Modal/index";
+import PostForm from "./components/PostForm/index";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	let [posts, setPosts] = useState([
+		{
+			id: 1,
+			title: "Single post",
+			status: "upcoming",
+		},
+		{
+			id: 2,
+			title: "Single post",
+			status: "dropped",
+		},
+		{
+			id: 3,
+			title: "Single post",
+			status: "ongoing",
+		},
+	]);
+	// add post
+	let addPost = (post) => {
+		setPosts((prevState) => [...prevState, post]);
+		setShowModal(false);
+	};
+	let [showModal, setShowModal] = useState(false);
+	return (
+		<>
+			<Navbar setShowModal={setShowModal} />
+			<PostsLists posts={posts} />
+			{showModal && (
+				<Modal setShowModal={setShowModal}>
+					<h1>Welcome to Website Name</h1>
+					<PostForm addPost={addPost} />
+				</Modal>
+			)}
+		</>
+	);
 }
 
 export default App;

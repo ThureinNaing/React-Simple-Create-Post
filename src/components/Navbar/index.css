@@ -1,0 +1,15 @@
+nav {
+  background-color: gray;
+  padding: 10px;
+}
+.container ul {
+  display: flex;
+}
+.container li {
+  list-style-type: none;
+  margin: 0 20px;
+}
+li:hover {
+  color: red;
+  cursor: pointer;
+}
